@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 62.5%;
+  background-color: #17162C;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 796px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto; 
+  column-gap: 20px;
+  row-gap: 30px;
+}
