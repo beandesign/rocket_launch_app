@@ -13,7 +13,7 @@ function App() {
     <div className="content">
       <Router>
         <Switch>
-          <Route path="/past">
+          <Route path="/past"> 
             <Past />
           </Route>
           <Route path="/">
