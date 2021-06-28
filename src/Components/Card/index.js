@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { 
   Wrapper, 
   Picture, 
@@ -12,7 +13,9 @@ import {
 
 function Card(
   { 
-    btnLabel, 
+    btnLabel,
+    btnTarget, 
+    btnVideo,
     title, 
     dateTitle,
     launchDate,
@@ -20,11 +23,27 @@ function Card(
     patch
   }
 ) {
+  const history = useHistory();
+
+  const date = new Date(launchDate);
+
+  const handleClick = () => {
+    if (btnTarget && !btnVideo) { 
+      history.push(btnTarget) 
+      window.gtag('event', 'click', { 'event_category': 'engagement', 'event_label': 'see_past_launches'});
+    }
+    if (btnVideo && !btnTarget ) { window.open(btnVideo) }
+  }
+
   return (
     <Wrapper>
-      <Picture>
-        <Image src={patch} alt="Mission patch" />
-      </Picture>
+      {
+        patch && (
+          <Picture>
+            <Image src={patch} alt="Mission patch" />
+          </Picture>
+        )
+      }
       {
         title && (
           <Title>{title}</Title>
@@ -33,7 +52,7 @@ function Card(
       <TextWrapper>
         <Column>
           <Label>{ dateTitle }</Label>
-          <Data>{ launchDate }</Data>
+          <Data>{date.toLocaleDateString('pt-BR')}</Data>
         </Column>
         <Column>
           <Label>mission</Label>
@@ -42,7 +61,7 @@ function Card(
       </TextWrapper>
       {
         btnLabel && (
-          <Button>
+          <Button id="past-launches" onClick={handleClick}>
             { btnLabel }
           </Button>
         )
